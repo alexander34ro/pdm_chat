@@ -58,7 +58,7 @@ public class ChannelListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_channel_list);
 
         if (!SendbirdAPI.hasDatabase()) {
-            OpenChannelDatabase db = Room.databaseBuilder(getApplicationContext(),
+            OpenChannelDatabase db = Room.databaseBuilder(this,
                     OpenChannelDatabase.class, "channel-details-database").build();
             SendbirdAPI.setDatabase(db);
         }

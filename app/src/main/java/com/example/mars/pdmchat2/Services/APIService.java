@@ -2,6 +2,8 @@ package com.example.mars.pdmchat2.Services;
 
 import com.example.mars.pdmchat2.ChannelDetail.OpenChannel;
 import com.example.mars.pdmchat2.ChannelList.Channels;
+import com.example.mars.pdmchat2.Login.User;
+import com.example.mars.pdmchat2.Login.Users;
 
 import io.reactivex.Single;
 import retrofit2.http.Body;
@@ -26,4 +28,7 @@ public interface APIService {
     @POST("open_channels")
     Single<OpenChannel> newOpenChannelData(@Body OpenChannel openChannel);
 
+    @Headers({apiToken})
+    @GET("users")
+    Single<Users> getAllUsers(@Query("limit") Integer limit);
 }

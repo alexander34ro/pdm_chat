@@ -4,6 +4,9 @@ import com.example.mars.pdmchat2.ChannelDetail.OpenChannelDao_Impl;
 import com.example.mars.pdmchat2.ChannelDetail.OpenChannelDatabase;
 import com.example.mars.pdmchat2.ChannelDetail.OpenChannelRepository;
 import com.example.mars.pdmchat2.ChannelList.ChannelsRepository;
+import com.example.mars.pdmchat2.Login.UsersRepository;
+
+import java.util.concurrent.Executor;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -14,6 +17,8 @@ public class SendbirdAPI {
     private static APIService apiService;
     private static OpenChannelRepository openChannelRepository = null;
     private static ChannelsRepository channelsRepository;
+    private static UsersRepository usersRepository;
+    private static Executor executor;
 
     private SendbirdAPI() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -26,6 +31,10 @@ public class SendbirdAPI {
         apiService = retrofit.create(APIService.class);
 
         channelsRepository = new ChannelsRepository();
+
+        usersRepository = new UsersRepository();
+
+        executor = command -> command.run();
     }
 
     public static SendbirdAPI getInstance() {
@@ -44,11 +53,17 @@ public class SendbirdAPI {
         return channelsRepository;
     }
 
+    public static UsersRepository loginRepo() {
+        return usersRepository;
+    }
+
+    public static Executor getExecutor() {return executor;}
+
     public static boolean hasDatabase() {
         return openChannelRepository != null;
     }
 
     public static void setDatabase(OpenChannelDatabase db) {
-        openChannelRepository = new OpenChannelRepository(new OpenChannelDao_Impl(db));
+        openChannelRepository = new OpenChannelRepository(db.openChannelDao());
     }
 }

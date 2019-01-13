@@ -72,7 +72,6 @@ public class ChannelDetailFragment extends Fragment {
         viewModel.getChannel().observe(this, openChannel -> {
             CollapsingToolbarLayout appBarLayout = this.getActivity().findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                assert openChannel != null;
                 appBarLayout.setTitle(openChannel.getName());
                 ((TextView) this.getView().findViewById(R.id.channel_detail)).setText(openChannel.getCustomType());
             }

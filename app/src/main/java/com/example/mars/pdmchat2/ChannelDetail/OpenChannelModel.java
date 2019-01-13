@@ -1,12 +1,12 @@
 package com.example.mars.pdmchat2.ChannelDetail;
 
-import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.mars.pdmchat2.Services.SendbirdAPI;
 
 public class OpenChannelModel extends ViewModel {
-    private LiveData<OpenChannel> channel;
+    private MutableLiveData<OpenChannel> channel;
     private OpenChannelRepository repository = SendbirdAPI.repo();
 
     public OpenChannelModel() {
@@ -21,7 +21,7 @@ public class OpenChannelModel extends ViewModel {
         channel = repository.getChannel(url);
     }
 
-    public LiveData<OpenChannel> getChannel() {
+    public MutableLiveData<OpenChannel> getChannel() {
         return channel;
     }
 }
