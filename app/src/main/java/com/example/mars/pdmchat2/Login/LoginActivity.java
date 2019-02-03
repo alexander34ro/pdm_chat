@@ -75,11 +75,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
+        mEmailSignInButton.setOnClickListener(view -> attemptLogin());
+
+        Button chartButton = (Button) findViewById(R.id.chart_button);
+        chartButton.setOnClickListener(view -> {
+            Context context = getBaseContext();
+            Intent intent = new Intent(context, ChartActivity.class);
+
+            context.startActivity(intent);
         });
 
         mLoginFormView = findViewById(R.id.login_form);
